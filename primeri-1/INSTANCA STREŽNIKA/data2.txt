@@ -1,0 +1,3 @@
+[mysqld]
+datadir = ../data2
+port = 3310

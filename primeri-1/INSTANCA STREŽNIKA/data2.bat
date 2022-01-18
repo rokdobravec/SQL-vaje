@@ -1,0 +1,1 @@
+mysqld --defaults-file=data2.txt

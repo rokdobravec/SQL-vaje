@@ -1,0 +1,35 @@
+C:\Users\nejcm>cd C:\
+
+C:\>cd xampp
+
+C:\xampp>cd mysql
+
+C:\xampp\mysql>cd bin
+
+4. b) naloga ------ Iz strežnika 31.15.151.78:3308 iz podatkovne zbirke razno arhivirajte tabeli liki in telesa brez prožilcev. V
+eni izvozni datoteki naj bo struktura tabel, v drugi pa podatki. Restavrirajte dani tabeli v novo instanco strežnika.
+
+C:\xampp\mysql>mysqldump -h 31.15.151.78 -P 3308 -u rok -ppassword razno liki telesa --skip-triggers --no-data > liki_telesa_struktura.sql
+
+C:\xampp\mysql>mysqldump -h 31.15.151.78 -P 3308 -u rok -ppassword razno liki telesa --skip-triggers --no-create-info > liki_telesa_podatki.sql
+
+C:\xampp\mysql>mysql -u root -P 3310 -e "create database baza"
+
+C:\xampp\mysql>mysql -u root -P 3310 baza < liki_telesa_struktura.sql
+
+C:\xampp\mysql>mysql -u root -P 3310 baza < liki_telesa_podatki.sql
+
+
+4. c) naloga ------ Na strežnik 31.15.151.78:3307 v podatkovno zbirko z imenom enakim vašemu 
+uporabniškemu računu restavrirajte podatke iz datoteke world.sql
+
+C:\xampp\mysql>mysql -h 31.15.151.78 -P 3307 -u rok -pppassword podatkovna_zbirka < world.sql
+
+
+4. d) naloga ------ Arhivirajte tabelo osebe.rojstni_dnevi v HTML datoteko. 
+
+C:\xampp\mysql>mysqldump -h 31.15.151.78 -P 3308 -u rok -ppassword osebe rojstni_dnevi > rojstni_dnevi.sql
+
+C:\xampp\mysql>mysql -u root -P 3310 baza < rojstni_dnevi.sql
+
+C:\xampp\mysql>mysql -u root -P 3310 -e "select * from baza.rojstni_dnevi" --html > rojstni_dnevi.html
