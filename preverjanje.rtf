@@ -1,0 +1,231 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf0 \expnd0\expndtw0\kerning0
+db.getCollection('knjige').find(\{\})\
+\
+db.knjige.find(\{ $and: [ \{Leto:\{$gte:1995\}\}, \{Leto:\{$lte:2005\}\} ] \})\
+\
+db.knjige.find(\{Cena:\{$gt:29\}\},\{Naslov:1,Cena:1,_id:0\}).sort(\{Cena:-1\})\
+\
+db.knjige.find(\{Priimek_avtorja:/^M/\},\{Priimek_avtorja:1\})\
+\
+db.knjige.aggregate([\{$group:\{_id:"$Leto",Stevilo_knjig:\{$sum:1\}\}\},\
+\
+                      \{$sort:\{_id:1\}\}])\
+\
+db.knjige.aggregate([\{$match:\{Leto:2001\}\},\
+\
+                     \{$group:\{_id:null,Povprecna_cena:\{$avg:"$Cena"\}\}\}])\
+\
+db.knjige.find(\{\},\{Strani:1,Naslov:1\}).sort(\{Strani:-1\}).limit(3)\
+\
+\
+\
+use razred_priimek\
+\
+for(var i = 100;i<110;i++)\{\
+\
+    db.dijaki.insert(\{_id:i,ime:"Jaka",priimek:"Mencinger"\})\
+\
+\}\
+\
+use razred_priimek\
+\
+db.dijaki.update(\{_id:108\},\{$set:\{ime:"Nik"\}\})\
+\
+\
+\
+use razred_priimek\
+\
+db.dijaki.save(\{_id:106,ime:"Jaka"\})\
+\
+\
+\
+use razred_priimek\
+\
+db.dijaki.remove(\{_id:107\})\
+\
+\
+\
+use razred_priimek\
+\
+db.dijaki.count()\
+\
+\
+\
+mongoexport /d razred_priimek /c dijaki /jsonArray /out:dijaki.json\
+\
+\
+\
+mongoimport /d tretji_test /c knjige /jsonArray /file:knjige2.json\
+\
+\
+\
+db.createCollection("stranke",\{capped:true,size:2000000,max:5\})\
+\
+\
+\
+for(var i = 100;i<110;i++)\{\
+\
+    db.stranke.insert(\{_id:i\})\
+\
+\}\
+\
+db.stranke.remove(\{_id:106\})\
+\
+\
+\
+\
+\
+// gridFS \
+\
+C:\\Users\\267-PC-000\\Downloads\\MonoDB5\\MonoDB5>mongofiles /d datoteke list\
+\
+2022-03-29T11:55:16.067+0200    connected to: mongodb://localhost/\
+\
+hortenzija.jpg  595284\
+\
+pu\'9acava.jpg     845941\
+\
+tulipani.jpg    620888\
+\
+svetilnik.jpg   561276\
+\
+koala.jpg       780831\
+\
+krizantema.jpg  879394\
+\
+meduza.jpg      775702\
+\
+pingvini.jpg    777835\
+\
+\
+\
+C:\\Users\\267-PC-000\\Downloads\\MonoDB5\\MonoDB5>mongofiles /d datoteke get koala.jpg\
+\
+2022-03-29T11:55:39.956+0200    connected to: mongodb://localhost/\
+\
+2022-03-29T11:55:39.977+0200    finished writing to koala.jpg\
+\
+\
+\
+\
+\
+C:\\Users\\267-PC-000\\Downloads\\MonoDB5\\MonoDB5>mongofiles /d datoteke search k\
+\
+2022-03-29T11:56:09.001+0200    connected to: mongodb://localhost/\
+\
+svetilnik.jpg   561276\
+\
+koala.jpg       780831\
+\
+krizantema.jpg  879394\
+\
+\
+\
+C:\\Users\\267-PC-000\\Downloads\\MonoDB5\\MonoDB5>mongofiles /d datoteke list k\
+\
+2022-03-29T11:56:20.101+0200    connected to: mongodb://localhost/\
+\
+koala.jpg       780831\
+\
+krizantema.jpg  879394\
+\
+\
+\
+C:\\Users\\267-PC-000\\Downloads\\MonoDB5\\MonoDB5>mongofiles /d datoteke delete meduza.jpg\
+\
+2022-03-29T11:56:39.612+0200    connected to: mongodb://localhost/\
+\
+2022-03-29T11:56:39.631+0200    successfully deleted all instances of 'meduza.jpg' from GridFS\
+\
+\
+\
+\
+\
+C:\\Users\\267-PC-000\\Downloads\\MonoDB5\\MonoDB5>mongofiles /d datoteke list\
+\
+2022-03-29T11:56:47.318+0200    connected to: mongodb://localhost/\
+\
+hortenzija.jpg  595284\
+\
+pu\'9acava.jpg     845941\
+\
+tulipani.jpg    620888\
+\
+svetilnik.jpg   561276\
+\
+koala.jpg       780831\
+\
+krizantema.jpg  879394\
+\
+pingvini.jpg    777835\
+\
+\
+\
+C:\\Users\\267-PC-000\\Downloads\\MonoDB5\\MonoDB5>mongofiles /d datoteke put NUB-3PN-preverjanje-2020.pdf\
+\
+2022-03-29T11:57:14.800+0200    connected to: mongodb://localhost/\
+\
+2022-03-29T11:57:14.811+0200    adding gridFile: NUB-3PN-preverjanje-2020.pdf\
+\
+\
+\
+2022-03-29T11:57:14.833+0200    added gridFile: NUB-3PN-preverjanje-2020.pdf\
+\
+\
+\
+\
+\
+C:\\Users\\267-PC-000\\Downloads\\MonoDB5\\MonoDB5>mongofiles /d datoteke list\
+\
+2022-03-29T11:57:20.793+0200    connected to: mongodb://localhost/\
+\
+hortenzija.jpg  595284\
+\
+pu\'9acava.jpg     845941\
+\
+tulipani.jpg    620888\
+\
+svetilnik.jpg   561276\
+\
+koala.jpg       780831\
+\
+krizantema.jpg  879394\
+\
+pingvini.jpg    777835\
+\
+NUB-3PN-preverjanje-2020.pdf    390207\
+\
+\
+\
+C:\\Users\\267-PC-000\\Downloads\\MonoDB5\\MonoDB5>\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}
